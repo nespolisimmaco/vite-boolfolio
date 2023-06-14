@@ -15,6 +15,14 @@ export default {
         <div class="card-body text-center">
             <h5>{{ project.title }}</h5>
             <p>{{ project.description }}</p>
+            <div v-if="project.type">
+                <h6 class="text-primary">Tipo</h6>
+                <div>{{ project.type.name }}</div>
+            </div>
+            <div v-if="project.technologies != ''">
+                <h6 class="text-primary mt-2">Tecnologie</h6>
+                <div v-for="technology in project.technologies">{{ technology.name }}</div>
+            </div>
         </div>
     </div>
 </template>
