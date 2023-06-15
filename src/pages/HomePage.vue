@@ -1,6 +1,11 @@
 <script>
 export default {
-    name: "HomePage"
+    name: "HomePage",
+    data() {
+        return {
+
+        }
+    }
 }
 
 </script>

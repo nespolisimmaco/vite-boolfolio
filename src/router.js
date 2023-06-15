@@ -1,9 +1,10 @@
 import { createRouter, createWebHistory } from "vue-router";
 import HomePage from "./pages/HomePage.vue";
 import AboutUsPage from "./pages/AboutUsPage.vue";
+import ProjectsPage from "./pages/ProjectsPage.vue";
 
 const router = createRouter({
-  history: createWebHistory(), //createWebHistory() serve a router per capire in quale modo deve spostarsi da una pagina all'altra, finge di essere una navigazione multipagina, simula il passaggio da una pagina all'altra
+  history: createWebHistory(),
   routes: [
     //array delle rotte
     {
@@ -15,6 +16,11 @@ const router = createRouter({
       path: "/about-us",
       name: "about-us",
       component: AboutUsPage,
+    },
+    {
+      path: "/projects",
+      name: "projects",
+      component: ProjectsPage,
     },
   ],
 });
