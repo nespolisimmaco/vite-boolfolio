@@ -23,6 +23,8 @@ export default {
                 <h6 class="text-primary mt-2">Tecnologie</h6>
                 <div v-for="technology in project.technologies">{{ technology.name }}</div>
             </div>
+            <router-link :to="{ name: 'single_project', params: { slug: project.slug } }"
+                class="btn btn-primary my-3">Dettagli</router-link>
         </div>
     </div>
 </template>
