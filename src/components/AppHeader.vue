@@ -44,4 +44,10 @@ export default {
 </template>
 
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.router-link-active {
+    background-color: cadetblue;
+    font-weight: 600;
+    color: white;
+}
+</style>

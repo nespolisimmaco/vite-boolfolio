@@ -16,7 +16,19 @@ export default {
         axios.get(`http://localhost:8000/api/projects/${slug}`).then(resp => {
             console.log(resp);
             this.project = resp.data.result;
+        }, error => {
+            console.log(error);
+            if (error.response.status === 404) {
+                this.$router.push({ name: 'NotFound' })
+            } else {
+                alert('Oops qualcosa è andato storto...')
+            }
         });
+    },
+    methods: {
+        goBack() {
+            this.$router.back();
+        }
     }
 }
 </script>
@@ -45,12 +57,13 @@ export default {
             <div>{{ project.description }}</div>
         </div>
         <!-- Tecnologie -->
-        <div class="mt-3" v-if="project.technologies != ''">
+        <div class="mt-3" v-if="project.technologies && project.technologies != ''">
             <h4>Tecnologie</h4>
             <ul>
                 <li v-for="technology in project.technologies">{{ technology.name }}</li>
             </ul>
         </div>
+        <a class="btn btn-primary" @click.prevent="goBack()" href="">Indietro</a>
     </div>
 </template>
 
