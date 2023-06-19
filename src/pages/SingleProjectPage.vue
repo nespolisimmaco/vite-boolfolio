@@ -13,7 +13,7 @@ export default {
     mounted() {
         console.log(this.$route);
         const slug = this.$route.params.slug;
-        axios.get(`http://localhost:8000/api/projects/${slug}`).then(resp => {
+        axios.get(`${store.apiBaseUrl}/api/projects/${slug}`).then(resp => {
             console.log(resp);
             this.project = resp.data.result;
         }, error => {

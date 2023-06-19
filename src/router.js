@@ -1,6 +1,5 @@
 import { createRouter, createWebHistory } from "vue-router";
 import HomePage from "./pages/HomePage.vue";
-import AboutUsPage from "./pages/AboutUsPage.vue";
 import ProjectsPage from "./pages/ProjectsPage.vue";
 import SingleProjectPage from "./pages/SingleProjectPage.vue";
 import NotFound from "./pages/NotFound.vue";
@@ -17,7 +16,8 @@ const router = createRouter({
     {
       path: "/about-us",
       name: "aboutus",
-      component: AboutUsPage,
+      // Lazy loading
+      component: () => import("./pages/AboutUsPage.vue"),
     },
     {
       path: "/projects",

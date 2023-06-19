@@ -1,6 +1,8 @@
 <script>
 import axios from 'axios';
 import ProjectCard from '../components/ProjectCard.vue';
+import { store } from "../store";
+
 export default {
     components: { ProjectCard },
     name: "ProjectsPage",
@@ -9,19 +11,31 @@ export default {
             projects: [],
             currentPage: 1,
             lastPage: null,
-            totalProjects: 0
+            totalProjects: 0,
+            store,
+            types: [],
+            selectedType: ""
         };
     },
     mounted() {
         this.getProjects();
+        this.getTypes();
     },
     methods: {
+        getTypes() {
+            axios.get(`${store.apiBaseUrl}/api/types`).then(resp => {
+                this.types = resp.data.results;
+            })
+        },
         getProjects(pageNum = 1) {
-            axios.get("http://localhost:8000/api/projects", {
-                params: {
-                    page: pageNum
-                }
-            }).then(resp => {
+            const params = {
+                page: pageNum,
+
+            }
+            if (this.selectedType != 'all') {
+                params.type_id = this.selectedType;
+            }
+            axios.get(`${store.apiBaseUrl}/api/projects`, { params }).then(resp => {
                 console.log(resp);
                 this.projects = resp.data.result.data;
                 this.currentPage = resp.data.result.current_page;
@@ -37,6 +51,10 @@ export default {
 <template>
     <div class="container">
         <h1>Lista dei progetti</h1>
+        <select @change="getProjects()" v-model="selectedType" class="form-select" aria-label="Type select">
+            <option value="all">Tutti i progetti</option>
+            <option :value="type.id" v-for="type in types" :key="type.id">{{ type.name }}</option>
+        </select>
         <div class="text-end my-2">
             Trovati {{ totalProjects }} progetti
         </div>
